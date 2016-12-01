@@ -4,53 +4,59 @@
   If you have any questions or feedback please leave us a message with your email address
 </p>
 
-<div class="col-md-6">
+<div class="container">
+  <div class="col-md-6">
 
-  <!-- Email -->
-  <div class={{emailFeedback}}>
-    <label class="control-label" for="email-input">Email*</label>
-    {{
-      input
-      type="email"
-      id="email-input"
-      class="form-control"
-      value=email
-      placeholder="Your e-mail address."
-      autofocus="autofocus"
-    }}
-    {{#if validEmail}}
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-    {{/if}}
+    <!-- Email -->
+    <div class={{emailFeedback}}>
+      <label class="control-label" for="email-input">Email*</label>
+      {{
+        input
+        type="email"
+        id="email-input"
+        class="form-control"
+        value=email
+        placeholder="Your e-mail address."
+        autofocus="autofocus"
+      }}
+      {{#if validEmail}}
+        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+      {{/if}}
+    </div>
+
+    <!-- Message -->
+    <div class={{msgFeedback}}>
+      <label class="control-label" for="message-textarea">Message*</label>
+      {{
+        textarea
+        id="message-textarea"
+        class="form-control"
+        value=msg
+        placeholder="Type a message at least 5 characters long."
+        rows="5"
+        maxlength=charLimit
+      }}
+      <!-- Character Limit -->
+      {{#if validMsg}}
+        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+      {{/if}}
+      <i><small>Character limit: {{charCount}}</small></i>
+    </div>
+
+    <!-- Send message -->
+    <button
+      disabled="{{unless readyToSend 'disabled'}}"
+      {{action 'sendMessage'}}
+      class="btn btn-success">
+      Send message
+    </button>
   </div>
-
-  <!-- Message -->
-  <div class={{msgFeedback}}>
-    <label class="control-label" for="message-textarea">Message*</label>
-    {{
-      textarea
-      id="message-textarea"
-      class="form-control"
-      value=msg
-      placeholder="Type a message at least 5 characters long."
-      rows="5"
-      maxlength=charLimit
-    }}
-    <!-- Character Limit -->
-    {{#if validMsg}}
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-    {{/if}}
-    <i><small>Character limit: {{charCount}}</small></i>
-  </div>
-
-  <!-- Send message -->
-  <button
-    disabled="{{unless readyToSend 'disabled'}}"
-    {{action 'sendMessage'}}
-    class="btn btn-success">
-    Send message
-  </button>
 </div>
-
-{{#if responseMessage}}
-  <div class="alert alert-success">{{responseMessage}}</div>
-{{/if}}
+<br>
+<div class="container">
+  <div class="col-md-6">
+    {{#if responseMessage}}
+      <div class="alert alert-success">{{responseMessage}}</div>
+    {{/if}}
+  </div>
+</div>

@@ -44,10 +44,19 @@ export default Ember.Controller.extend({
   displayResponse: Ember.computed.gte('responseMessage.length', 1),
   actions: {
     sendMessage() {
-      alert('Sending your message...');
-      this.set('email', '');
-      this.set('msg', '');
-      this.set('responseMessage', 'Thank you! We will reply to you shortly.');
+      const email = this.get('email');
+      const message = this.get('msg');
+
+      const newContact = this.store.createRecord('contact', {
+        email: email, message: message
+      });
+
+      newContact.save().then((response) => {
+        this.set('email', '');
+        this.set('msg', '');
+        this.set('responseMessage', `Thank you! We will reply to you shortly. Your message id: ${response.id}`);
+      });
     }
   }
+
 });

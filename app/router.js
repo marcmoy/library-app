@@ -12,6 +12,7 @@ Router.map(function() {
 
   this.route('admin', function() {
     this.route('invitations');
+    this.route('messages');
   });
 
   this.route('libraries', function() {
